@@ -1,43 +1,45 @@
 package cri.java.step2.swing;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.sun.istack.internal.Nullable;
+import cri.java.step2.calculation.operations.binary.BinaryOperation;
 
+import java.awt.Dimension;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class OutputPanel extends JPanel implements ActionListener{
-	private FormulaField formula = new FormulaField();
-    private NumericField numeric = new NumericField();
-    private ReceiveValues receive;
+class OutputPanel extends JPanel {
+    private FormulaField formula = new FormulaField();
+    private NumericField numeric;
 
-	OutputPanel(){
-		BoxLayout calcLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
+    OutputPanel(int inputFieldSize) {
+        BoxLayout calcLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         setLayout(calcLayout);
-        setPreferredSize(new Dimension(320, 120));
+        setPreferredSize(new Dimension(340, 120));
         EmptyBorder margin = new EmptyBorder(20, 20, 20, 20);
         setBorder(margin);
-
-        numeric.setText("0");
-
         add(formula);
+         numeric = new NumericField(inputFieldSize);
         add(numeric);
-	}
+        numeric.setText("0");
+    }
 
-	public void actionPerformed(ActionEvent e) {
-		JButton pushButton = (JButton) e.getSource();
-		String buttonValue = pushButton.getText();
-		String formulaValue = formula.getText();
-		String numericValue = numeric.getText();
+    void updateNumericField(String value) {
+        numeric.setText(value);
+    }
 
-		receive = new ReceiveValues(formulaValue, numericValue, buttonValue);
-	}
+    void updateFormulaField(@Nullable Double value, @Nullable BinaryOperation operation) {
+        if ((value != null) && (operation != null)) {
+            this.formula.setText(this.doubleToString(value).concat(" ").concat(operation.toString()));
+        } else {
+            this.formula.setText("");
+        }
+    }
 
-	public void resetValues(String formulaValue, String numericValue) {
-		formula.setText(formulaValue);
-		numeric.setText(numericValue);
-	}
+    private String doubleToString(double value) {
+        if (value == (long) value) {
+            return String.valueOf((long) value);
+        }
+        return String.valueOf(value);
+    }
 }

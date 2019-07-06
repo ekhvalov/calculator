@@ -7,12 +7,12 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class FormulaField extends JTextField{
+class FormulaField extends JTextField{
 	FormulaField(){
 		setHorizontalAlignment(JTextField.RIGHT);
 		setFont(new Font("MS UI Gothic", Font.PLAIN, 30));
 		setEditable(false);
-		setPreferredSize(new Dimension(320,40));
+		setPreferredSize(new Dimension(335,40));
         LineBorder border = new LineBorder(Color.DARK_GRAY, 1);
         setBorder(border);
 	}
