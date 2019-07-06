@@ -48,7 +48,7 @@ public class ButtonActions {
 
     public String[] pushSymbols(String history, String mainView, String buttonValue) {
         if (history.isEmpty()) {
-            history = mainView + buttonValue;
+            history = mainView;
             previousOperator = buttonValue;
             mainView = "0";
         } else {
@@ -60,6 +60,8 @@ public class ButtonActions {
             calculation.eraseAnswer();
             mainView = history;
             history = "";
+        } else {
+            history = history.concat(buttonValue);
         }
         return new String[]{history, mainView};
     }
