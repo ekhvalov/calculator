@@ -33,13 +33,13 @@ public class ReceiveValues {
                 views = buttonActions.pushPoint(history, mainView, buttonValue);
                 break;
             case "CA":
-                views = buttonActions.pushClearAll(history, mainView, buttonValue);
+                views = buttonActions.pushClearAll();
                 break;
             case "C":
-                views = buttonActions.pushClear(history, mainView, buttonValue);
+                views = buttonActions.pushClear(history);
                 break;
             case "←":
-                views = buttonActions.pushArrow(history, mainView, buttonValue);
+                views = buttonActions.pushArrow(history, mainView);
                 break;
             default:
                 if (numbers.contains(buttonValue)) {
